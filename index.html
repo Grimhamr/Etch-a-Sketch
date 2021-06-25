@@ -8,14 +8,21 @@
 <style>
 #body{
 overflow: hidden;
+/*background-color: #C3CDE6;   periwinkle*/
 background-color: coral;
 margin: 0px;
 }
 
+#header{
+
+    font-family: "courier new";
+    font-size: large;
+    text-align: center;
+}
 #clearButton{
     height:4vh;
-    width:15vh;
-    margin-left:42.5vw;
+    width:10vw;
+    margin-left:45vw;
 
 
 }
@@ -31,28 +38,25 @@ margin: 0px;
     .gridDiv{
     aspect-ratio: 1;
      width:1fr;
+     transition: background-color 0.7s;
         }
     
     .gridDiv:hover {
-  background-color: black;
+  background-color: rgb(161, 59, 59);
+ 
 
     }
 
     .gridDivHovered
     {
-        background-color: black;
-       
+        
+       background-color: rgb(28, 143, 143);
     }
 </style>
 
 <body id="body">
 
-    <!--button:Add a button to the top of the screen which will clear the current grid
-        send the user a popup asking for how many squares per side to make the new grid. 
-        Once entered the new grid should be generated in the same total space as before (e.g. 960px wide) 
-        and now you’ve got a new sketch pad. Tip: Set the limit for the user input to a maximum of 100. 
-        A larger number of squares results in more computer resources being used, resulting in possible delays, 
-        freezing, or crashing that we want to prevent.-->
+    <header id="header">Etch-a-Sketch!</header>
     <button id="clearButton" onclick="buttonClick()">Clear!</button>
     <div id="mainContainer">
 
@@ -70,7 +74,7 @@ margin: 0px;
 
 
 <script>
-   let squaresPerSide=16;
+   let squaresPerSide=42;
 const body = document.querySelector("#body");
 let numberOfDivs = (squaresPerSide*squaresPerSide);
 
