@@ -7,9 +7,9 @@
 
 <style>
 #body{
-width:100vw;
-height:100vh;
-
+overflow: hidden;
+background-color: coral;
+margin: 0px;
 }
 
 #clearButton{
@@ -21,18 +21,18 @@ height:100vh;
 }
     #mainContainer{
     display: grid;
+    position: absolute;
     
-    background-color: coral;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
-    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
-   
+    width:100vw;
+
     }
     
     
     .gridDiv{
-    width:6.25vh;
-    height:6.25vh;
-    }
+    aspect-ratio: 1;
+     width:1fr;
+        }
+    
     .gridDiv:hover {
   background-color: black;
 
@@ -41,6 +41,7 @@ height:100vh;
     .gridDivHovered
     {
         background-color: black;
+       
     }
 </style>
 
@@ -69,16 +70,26 @@ height:100vh;
 
 
 <script>
-let squaresPerSide=16;
-let numberOfDivs = (squaresPerSide*squaresPerSide);
+   let squaresPerSide=16;
 const body = document.querySelector("#body");
+let numberOfDivs = (squaresPerSide*squaresPerSide);
+
 buildPage();
 
+
 function buildPage(){
+
+ 
+    numberOfDivs = (squaresPerSide*squaresPerSide);
     console.log("page building initialized");
 var mainContainer = document.querySelector("#mainContainer");
-//element.parentNode.removeChild(element);
+//change cols and rows depending on new squaresperside
+mainContainer.style.setProperty('grid-template-columns', 'repeat(' + squaresPerSide + ', 1fr)');
+mainContainer.style.setProperty('grid-template-rows', 'repeat(' + squaresPerSide + ', 1fr)');
+
+
 var toAdd = document.createDocumentFragment();
+//i<numberofdivs because it starts from 0
 for(var i=0; i < numberOfDivs; i++){
    var newDiv = document.createElement('div');
    newDiv.id = 'div'+i;
@@ -95,7 +106,7 @@ var turnBlack = function(obj) {
    //console does log, but how do i make it stay black? how do i call its id?
   console.log(obj);
   //  add them to the class of Hovered, which makes them black
-    this.className="gridDivHovered";
+    this.classList.add("gridDivHovered");
 };
 //for loop that adds eventlisteners to every single div, making them black on entry and leaving them black on exit
 for (var i = 0; i < squareDivs.length; i++) {
