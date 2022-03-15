@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-
 <html>
 <head>  
     <title>Etch-a-Sketch!</title>
 </head>
 
 <style>
+    
 #body{
-overflow: hidden;
-/*background-color: #C3CDE6;   periwinkle*/
-background-color: coral;
-margin: 0px;
+    overflow: hidden;
+    /*background-color: #C3CDE6;   periwinkle*/
+    background-color: coral;
+    margin: 0px;
 }
 
 #header{
-
     font-family: "courier new";
     font-size: large;
     text-align: center;
@@ -23,115 +22,92 @@ margin: 0px;
     height:4vh;
     width:10vw;
     margin-left:45vw;
-
-
 }
-    #mainContainer{
+#mainContainer{
     display: grid;
     position: absolute;
-    
     width:100vw;
+ }
 
-    }
-    
-    
-    .gridDiv{
+.gridDiv{
     aspect-ratio: 1;
      width:1fr;
      transition: background-color 0.7s;
-        }
+}
     
     .gridDiv:hover {
   background-color: rgb(161, 59, 59);
- 
-
     }
 
     .gridDivHovered
-    {
-        
+    { 
        background-color: rgb(28, 143, 143);
     }
 </style>
 
-<body id="body">
+    <body id="body">
 
-    <header id="header">Etch-a-Sketch!</header>
-    <button id="clearButton" onclick="buttonClick()">Clear!</button>
-    <div id="mainContainer">
+        <header id="header">Etch-a-Sketch!</header>
+        <button id="clearButton" onclick="buttonClick()">Clear!</button>
+        <div id="mainContainer">
 
-
-    
-</div>
-
-
-
-
-</body>
-
-
+        </div>
+    </body>
 </html>
 
-
 <script>
-   let squaresPerSide=42;
+let squaresPerSide=42;
 const body = document.querySelector("#body");
 let numberOfDivs = (squaresPerSide*squaresPerSide);
 
 buildPage();
-
+    
 
 function buildPage(){
-
- 
     numberOfDivs = (squaresPerSide*squaresPerSide);
     console.log("page building initialized");
-var mainContainer = document.querySelector("#mainContainer");
-//change cols and rows depending on new squaresperside
-mainContainer.style.setProperty('grid-template-columns', 'repeat(' + squaresPerSide + ', 1fr)');
-mainContainer.style.setProperty('grid-template-rows', 'repeat(' + squaresPerSide + ', 1fr)');
+    var mainContainer = document.querySelector("#mainContainer");
+    //change cols and rows depending on new squaresperside
+    mainContainer.style.setProperty('grid-template-columns', 'repeat(' + squaresPerSide + ', 1fr)');
+    mainContainer.style.setProperty('grid-template-rows', 'repeat(' + squaresPerSide + ', 1fr)');
 
+    var toAdd = document.createDocumentFragment();
+    //i<numberofdivs because it starts from 0
+    for(var i=0; i < numberOfDivs; i++){
+       var newDiv = document.createElement('div');
+       newDiv.id = 'div'+i;
+       newDiv.className = 'gridDiv';
+       toAdd.appendChild(newDiv);
+    }
+    mainContainer.appendChild(toAdd);
 
-var toAdd = document.createDocumentFragment();
-//i<numberofdivs because it starts from 0
-for(var i=0; i < numberOfDivs; i++){
-   var newDiv = document.createElement('div');
-   newDiv.id = 'div'+i;
-   newDiv.className = 'gridDiv';
-   toAdd.appendChild(newDiv);
-}
-mainContainer.appendChild(toAdd);
+    //set eventlistener for each square div, to use it to make them black when mouse hovers over, and stay black when they leave
+    var squareDivs = document.getElementsByClassName("gridDiv");
 
-//set eventlistener for each square div, to use it to make them black when mouse hovers over, and stay black when they leave
-var squareDivs = document.getElementsByClassName("gridDiv");
-
-var turnBlack = function(obj) {
-   console.log(this + "square is now black");
-   //console does log, but how do i make it stay black? how do i call its id?
-  console.log(obj);
-  //  add them to the class of Hovered, which makes them black
-    this.classList.add("gridDivHovered");
-};
-//for loop that adds eventlisteners to every single div, making them black on entry and leaving them black on exit
-for (var i = 0; i < squareDivs.length; i++) {
-    squareDivs[i].addEventListener('mousein', turnBlack, false);
-    squareDivs[i].addEventListener('mouseleave', turnBlack, false);
-}
+    var turnBlack = function(obj) {
+       console.log(this + "square is now black");
+       //console does log, but how do i make it stay black? how do i call its id?
+      console.log(obj);
+      //  add them to the class of Hovered, which makes them black
+        this.classList.add("gridDivHovered");
+    };
+    //for loop that adds eventlisteners to every single div, making them black on entry and leaving them black on exit
+    for (var i = 0; i < squareDivs.length; i++) {
+        squareDivs[i].addEventListener('mousein', turnBlack, false);
+        squareDivs[i].addEventListener('mouseleave', turnBlack, false);
+    }
 }
     //function for button
 function buttonClick(){
 
-squaresPerSide = prompt("How many squares per side do you want?");
-mainContainer = document.querySelector("#mainContainer");
-mainContainer.remove();
-mainContainer = document.createElement("div");
-mainContainer.id="mainContainer";
-body.appendChild(mainContainer);
+    squaresPerSide = prompt("How many squares per side do you want?");
+    mainContainer = document.querySelector("#mainContainer");
+    mainContainer.remove();
+    mainContainer = document.createElement("div");
+    mainContainer.id="mainContainer";
+    body.appendChild(mainContainer);
 
-buildPage();
+    buildPage();
 }
-    
-
-
 
 </script>
